@@ -1,0 +1,18 @@
+.container {
+    width: 940px;
+    margin: auto;
+}
+
+.command_blocks_wrapper {
+    margin-top: 30px;
+}
+
+.command_block_wrapper {
+    margin: 15px auto;
+}
+
+.command_block {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 15px;
+}

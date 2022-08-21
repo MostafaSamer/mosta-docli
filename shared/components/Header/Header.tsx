@@ -10,7 +10,7 @@ const Header: FC = () => {
     return (
         <div className='header-wrapper'>
             <div className={styles.container}>
-                <div className='header'>
+                <div className={styles.header}>
                     <Row gutter={12} align='middle' justify='center'>
                         <Col>
                             <Image src='/images/pluginIcon.png' width={"80%"} height={"80%"}/>

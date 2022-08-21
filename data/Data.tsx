@@ -1,20 +1,6 @@
 import allCommand from "./all-commands"
 import apiCall from "../API/api";
 
-// interface command {
-//     command: String,
-//     description: String,
-//     singlepage: Boolean
-// }
-
-// interface line {
-//     name: String,
-//     description: String,
-//     categories: Array<String>,
-//     namespace: String,
-//     commands: Array<command>
-// }
-
 const getAllCommands = () => {
     return allCommand;
 }

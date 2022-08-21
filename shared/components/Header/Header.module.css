@@ -1,3 +1,12 @@
+.container {
+    width: 940px;
+    margin: auto;
+}
+
+.header {
+    margin: 30px auto;
+}
+
 .header_title_2 {
     color: red;
 }
