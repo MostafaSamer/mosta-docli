@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-export default (req, res) => {
+export default (req: any, res: any) => {
   const fileName = req.body.fileName;
 
   const dirRelativeToApiFolder = 'commands'

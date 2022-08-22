@@ -1,8 +1,8 @@
-import allCommand from "./all-commands"
 import apiCall from "../API/api";
 
-const getAllCommands = () => {
-    return allCommand;
+const getAllCommands = async () => {
+    let res = await apiCall("get", "/allfiles");
+    return res;
 }
 
 const getSingleCommand = async (name: string) => {

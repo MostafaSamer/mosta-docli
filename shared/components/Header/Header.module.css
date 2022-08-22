@@ -7,6 +7,14 @@
     margin: 30px auto;
 }
 
+.header:hover {
+    cursor: pointer;
+}
+
+.header_title {
+    margin-bottom: 0.25px !important;
+}
+
 .header_title_2 {
     color: red;
 }

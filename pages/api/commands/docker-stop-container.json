@@ -1,0 +1,33 @@
+{
+    "name": "Docker Container Stop",
+    "description": "Stop one or more running containers",
+    "categories": ["db", "backup", "api", "ruby"],
+    "namespace": "webops-docker",
+    "commands": [
+        {
+            "command": "docker",
+            "description": "Service Name",
+            "singlepage": true
+        },
+        {
+            "command": "container",
+            "description": "Target Container in docker service",
+            "singlepage": true
+        },
+        {
+            "command": "stop",
+            "description": "Remove directories and their contents recursively.",
+            "singlepage": false
+        },
+        {
+            "command": "[OPTIONS]",
+            "description": "--time , -t 10 Seconds to wait for stop before killing it",
+            "singlepage": false
+        },
+        {
+            "command": "CONTAINER",
+            "description": "Target Container want to stop",
+            "singlepage": false
+        }
+    ]
+}

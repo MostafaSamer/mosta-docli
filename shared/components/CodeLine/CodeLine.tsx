@@ -8,9 +8,10 @@ const { Title, Paragraph } = Typography;
 
 interface Props {
     commandData: ILine;
+    codeLineRef: any;
 }
 
-const CodeLine: FC<PropsWithChildren<Props>> = ({ commandData }) => {
+const CodeLine: FC<PropsWithChildren<Props>> = ({ commandData, codeLineRef }) => {
 
     return (
         <div className='code-line-wrapper'>
@@ -21,7 +22,7 @@ const CodeLine: FC<PropsWithChildren<Props>> = ({ commandData }) => {
                             commandData?.commands?.length > 0 &&
                             commandData?.commands.map((item: any, index) =>
                                 <Col key={index}>
-                                    <Title level={3}>{item.command}</Title>
+                                    <Title level={3} ref={el => codeLineRef.current[index] = el}>{item.command}</Title>
                                 </Col>
                             )
                         }
