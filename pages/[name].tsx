@@ -14,14 +14,16 @@ const Command: FC = () => {
     const [commandData, setCommandData] = useState<ILine>();
 
     const DrawLine = () => {
-        console.log(codeLineRef.current[0].offsetHeight)
+        console.log(window.scrollY)
         var c = document.getElementById("myCanvas") as HTMLCanvasElement | null;
-        c!.width = window.innerWidth;
-        c!.height = window.innerHeight - 400;
+        c!.width = document.body.offsetWidth;
+        c!.height = document.body.offsetHeight;
         var ctx = c?.getContext("2d");
         ctx?.beginPath();
-        ctx?.moveTo(0, codeLineRef.current[0].offsetHeight);
-        ctx?.lineTo(1194, 100);
+        const startX = codeLineRef.current[0].getBoundingClientRect().left  + (codeLineRef.current[0].getBoundingClientRect().width / 2)
+        const startY = codeLineRef.current[0].getBoundingClientRect().top + codeLineRef.current[0].getBoundingClientRect().height
+        ctx?.moveTo(startX, startY);
+        ctx?.lineTo(startX, startY + 50);
         ctx?.stroke();
     }
 
@@ -38,9 +40,9 @@ const Command: FC = () => {
 
     return (
         <>
+        <canvas id="myCanvas" style={{position:"absolute", border :"1px solid #d3d3d3;", top: "0", left: "0"}}>
+            Your browser does not support the HTML5 canvas tag.</canvas>
             <Header />
-            <canvas id="myCanvas" style={{position:"absolute", border :"1px solid #d3d3d3;"}}>
-                Your browser does not support the HTML5 canvas tag.</canvas>
             {commandData && <CodeLine codeLineRef={codeLineRef} commandData={commandData} />}
             {commandData && <CommandBlock commandData={commandData} />}
         </>

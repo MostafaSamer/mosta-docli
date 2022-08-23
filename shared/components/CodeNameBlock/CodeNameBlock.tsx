@@ -25,7 +25,7 @@ const CommandBlocks: FC = () => {
                     {
                         allCommand.length > 0 &&
                         allCommand.map((name, index) => {
-                            return <Link href={`/${name}`}>
+                            return <Link key={index} href={`/${name}`}>
                             <Text key={index}>
                                 <div className={styles.name_block}>
                                     <div className={styles.name}>

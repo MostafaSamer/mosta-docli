@@ -9,7 +9,7 @@ const { Title, Text } = Typography;
 
 const Header: FC = () => {
     return (
-        <div className='header-wrapper'>
+        <div className={styles.header_wrapper}>
             <div className={styles.container}>
                 <div className={styles.header}>
                     <Link href="/">
