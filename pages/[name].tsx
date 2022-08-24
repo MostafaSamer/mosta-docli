@@ -8,7 +8,7 @@ import Data from "../data/Data"
 import { ILine } from '../shared/Interfaces/line';
 
 const underLineHeight = 10;
-const spaceBetweenLine = 10;
+const spaceBetweenLine = 30;
 
 const Command: FC = () => {
     const router = useRouter();
@@ -50,14 +50,21 @@ const Command: FC = () => {
     }
 
     const drawFlowLine = (ctx: any) => {
+        const numCodeLine = codeLineRef.current.length;
+
         codeLineRef.current.map((item: any, index: number) => {
+            const leftDir = index < numCodeLine / 2;
             const { top, left, width, height } = getcodeLinePrefrence(item);
 
-            const startX = left + (width / 2);
-            const startY = top + height;
+            let startX = left + (width / 2);
+            let startY = top + height + underLineHeight;
+            ctx?.moveTo(startX, startY);
 
-            ctx?.moveTo(startX, startY + underLineHeight);
-            ctx?.lineTo(startX, startY + underLineHeight + 10 + (index * spaceBetweenLine));
+            startY = startY + 20 + (leftDir? (index * spaceBetweenLine) : ((numCodeLine - index -1) * spaceBetweenLine) )
+            ctx?.lineTo(startX, startY);
+
+            startX = startX + (leftDir? -100 : 100);
+            ctx?.lineTo(startX, startY);
         })
         return ctx;
     }
