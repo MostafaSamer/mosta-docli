@@ -24,7 +24,6 @@ const Command: FC = () => {
         c!.width = document.body.offsetWidth;
         c!.height = document.body.offsetHeight;
         let ctx = c?.getContext("2d");
-        ctx?.beginPath();
         return ctx;
     }
 
@@ -37,62 +36,62 @@ const Command: FC = () => {
         return { top, left, width, height }
     }
 
-    const drawUnderLine = (ctx: any) => {
-        codeLineRef.current.map((item: any, index: number) => {
-            const { top, left, width, height } = getcodeLinePrefrence(item);
+    const drawUnderLine = (ctx: any, item: any, index: number) => {
+        const { top, left, width, height } = getcodeLinePrefrence(item);
 
-            const startX = left;
-            const startY = top + height;
+        const startX = left;
+        const startY = top + height;
 
+        console.log(colors[index])
 
-            ctx!.strokeStyle = "#B1B1B1"
-
-            console.log(colors[index])
-
-            ctx?.moveTo(startX, startY);
-            ctx?.lineTo(startX, startY + underLineHeight);
-            ctx?.lineTo(startX + width, startY + underLineHeight);
-            ctx?.lineTo(startX + width, startY);
-        })
+        ctx?.moveTo(startX, startY);
+        ctx?.lineTo(startX, startY + underLineHeight);
+        ctx?.lineTo(startX + width, startY + underLineHeight);
+        ctx?.lineTo(startX + width, startY);
         return ctx;
     }
 
-    const drawFlowLine = (ctx: any) => {
+    const drawFlowLine = (ctx: any, item: any, index: number) => {
         const numCodeLine = codeLineRef.current.length;
+        const leftDir = index < numCodeLine / 2;
+        const { top, left, width, height } = getcodeLinePrefrence(item);
 
-        codeLineRef.current.map((item: any, index: number) => {
-            const leftDir = index < numCodeLine / 2;
-            const { top, left, width, height } = getcodeLinePrefrence(item);
+        let startX = left + (width / 2);
+        let startY = top + height + underLineHeight;
+        ctx?.moveTo(startX, startY);
 
-            let startX = left + (width / 2);
-            let startY = top + height + underLineHeight;
-            ctx?.moveTo(startX, startY);
+        startY = startY + 20 + (leftDir? (index * spaceBetweenLine) : ((numCodeLine - index -1) * spaceBetweenLine) )
+        ctx?.lineTo(startX, startY);
 
-            startY = startY + 20 + (leftDir? (index * spaceBetweenLine) : ((numCodeLine - index -1) * spaceBetweenLine) )
-            ctx?.lineTo(startX, startY);
+        const lineLongLeft = codeBlockRef.current[0].getBoundingClientRect().left - ((index + 1) * spaceBetweenLine)
+        const lineLongRight = codeBlockRef.current[0].getBoundingClientRect().left + codeBlockRef.current[0].getBoundingClientRect().width + (index * spaceBetweenLine)
+        startX = (leftDir? lineLongLeft : lineLongRight);
+        ctx?.lineTo(startX, startY);
 
-            const lineLongLeft = codeBlockRef.current[0].getBoundingClientRect().left - ((index + 1) * spaceBetweenLine)
-            const lineLongRight = codeBlockRef.current[0].getBoundingClientRect().left + codeBlockRef.current[0].getBoundingClientRect().width + (index * spaceBetweenLine)
-            startX = (leftDir? lineLongLeft : lineLongRight);
-            ctx?.lineTo(startX, startY);
+        const stopPoint = codeBlockRef.current[index].getBoundingClientRect().top + (codeBlockRef.current[index].getBoundingClientRect().height / 2);
+        startY = stopPoint;
+        ctx?.lineTo(startX, startY);
 
-            const stopPoint = codeBlockRef.current[index].getBoundingClientRect().top + (codeBlockRef.current[index].getBoundingClientRect().height / 2);
-            startY = stopPoint;
-            ctx?.lineTo(startX, startY);
-
-            const newStopPointLeft = startX + ((index + 1) * spaceBetweenLine);
-            const newStopPointRight = startX - ((index) * spaceBetweenLine);
-            startX = (leftDir? newStopPointLeft : newStopPointRight);
-            ctx?.lineTo(startX, startY);
-        })
+        const newStopPointLeft = startX + ((index + 1) * spaceBetweenLine);
+        const newStopPointRight = startX - ((index) * spaceBetweenLine);
+        startX = (leftDir? newStopPointLeft : newStopPointRight);
+        ctx?.lineTo(startX, startY);
         return ctx;
     }
 
-    const drawLine = () => {
-        let ctx = getBoardReady();
-        ctx = drawUnderLine(ctx);
-        ctx = drawFlowLine(ctx);
+    const drawLine = (ctx: any, item: any, index: number) => {
+        ctx = drawUnderLine(ctx, item, index);
+        ctx = drawFlowLine(ctx, item, index);
         ctx?.stroke();
+    }
+
+    const drawLines = () => {
+        let ctx = getBoardReady();
+        codeLineRef.current.map((item: any, index: number) => {
+            ctx?.beginPath();
+            ctx!.strokeStyle = colors[index]
+            drawLine(ctx, item, index);
+        })
     }
 
     useEffect(() => {
@@ -110,7 +109,7 @@ const Command: FC = () => {
 
     useEffect(() => {
         if(commandData && document && colors[0]) {
-            drawLine();
+            drawLines();
         };
     }, [commandData, colors])
 
