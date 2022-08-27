@@ -6,6 +6,7 @@ import CommandBlock from '../shared/components/CommadBlock'
 import { useEffect } from 'react';
 import Data from "../data/Data"
 import { ILine } from '../shared/Interfaces/line';
+import getRandomColors from '../shared/services/RandomColors'
 
 const underLineHeight = 10;
 const spaceBetweenLine = 30;
@@ -16,6 +17,7 @@ const Command: FC = () => {
     const codeBlockRef = useRef<any>([]);
 
     const [commandData, setCommandData] = useState<ILine>();
+    const [colors, setColors] = useState<Array<string>>([]);
 
     const getBoardReady = () => {
         let c = document.getElementById("drawBoard") as HTMLCanvasElement | null;
@@ -36,11 +38,16 @@ const Command: FC = () => {
     }
 
     const drawUnderLine = (ctx: any) => {
-        codeLineRef.current.map((item: any) => {
+        codeLineRef.current.map((item: any, index: number) => {
             const { top, left, width, height } = getcodeLinePrefrence(item);
 
             const startX = left;
             const startY = top + height;
+
+
+            ctx!.strokeStyle = "#B1B1B1"
+
+            console.log(colors[index])
 
             ctx?.moveTo(startX, startY);
             ctx?.lineTo(startX, startY + underLineHeight);
@@ -96,17 +103,24 @@ const Command: FC = () => {
     }, [router])
 
     useEffect(() => {
-        if(commandData && document) drawLine();
-        console.log(codeBlockRef.current[1].getBoundingClientRect().top);
+        if(commandData) {
+            setColors(getRandomColors(commandData?.commands.length ?? 1 ))
+        };
     }, [commandData])
+
+    useEffect(() => {
+        if(commandData && document && colors[0]) {
+            drawLine();
+        };
+    }, [commandData, colors])
 
     return (
         <>
-        <canvas id="drawBoard" style={{position:"absolute", border :"1px solid #d3d3d3", top: "0", left: "0"}}>
+        <canvas id="drawBoard" style={{position:"absolute", top: "0", left: "0"}}>
             Your browser does not support the HTML5 canvas tag.</canvas>
             <Header />
-            {commandData && <CodeLine codeLineRef={codeLineRef} commandData={commandData} />}
-            {commandData && <CommandBlock codeBlockRef={codeBlockRef} commandData={commandData} />}
+            {commandData && <CodeLine codeLineRef={codeLineRef} commandData={commandData}/>}
+            {commandData && colors && <CommandBlock codeBlockRef={codeBlockRef} commandData={commandData} colors={colors}/>}
         </>
     )
 }

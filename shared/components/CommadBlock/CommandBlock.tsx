@@ -8,16 +8,18 @@ const { Title, Text } = Typography;
 interface CommandBlocksProps {
     commandData: ILine;
     codeBlockRef: any;
+    colors: Array<string>
 }
 
 interface CommandBlockProps {
     description: String;
+    color: string
 }
 
-const CommandBlock: FC<PropsWithChildren<CommandBlockProps>> = ({ description }) => {
+const CommandBlock: FC<PropsWithChildren<CommandBlockProps>> = ({ description, color }) => {
     return (
         <div className={styles.command_block_wrapper}>
-            <div className={styles.command_block}>
+            <div className={styles.command_block} style={{border: "1px solid " + color}}>
                 <Text>
                     {description}
                 </Text>
@@ -26,7 +28,7 @@ const CommandBlock: FC<PropsWithChildren<CommandBlockProps>> = ({ description })
     )
 }
 
-const CommandBlocks: FC<PropsWithChildren<CommandBlocksProps>> = ({ commandData, codeBlockRef }) => {
+const CommandBlocks: FC<PropsWithChildren<CommandBlocksProps>> = ({ commandData, codeBlockRef, colors }) => {
     return (
         <div className={styles.command_blocks_wrapper}>
             <div className={styles.container}>
@@ -35,7 +37,7 @@ const CommandBlocks: FC<PropsWithChildren<CommandBlocksProps>> = ({ commandData,
                         commandData.commands.length > 0 &&
                         commandData.commands.map((command, index) => {
                             return <div ref={(el: any) => codeBlockRef.current[index] = el} key={index}>
-                                <CommandBlock description={command.description} />
+                                <CommandBlock description={command.description} color={colors[index]}/>
                             </div>
                         })
                     }
