@@ -1,0 +1,24 @@
+{
+    "name": "Port Forward Monogo Express Service",
+    "description": "This Command Used to Run Monog Express Services with Port Forward on Your Machine",
+    "categories": ["db", "backup", "api", "ruby"],
+    "namespace": "webops-express",
+    "commands": [
+        {
+            "command": "kubectl",
+            "description": "The Kubernetes command-line tool, kubectl, allows you to run commands against Kubernetes clusters. You can use kubectl to deploy applications, inspect and manage cluster resources, and view logs. For more information including a complete list of kubectl operations, see the kubectl"
+        },
+        {
+            "command": "port-forward",
+            "description": "A port forward is a way of making a computer on your home or business network accessible to computers on the internet, even though they are behind a router or firewall. It is commonly used in gaming, security cameras, home automation, and the Internet of Things (IoT)."
+        },
+        {
+            "command": "svc/mongo-express-service",
+            "description": "Choose Monog Express Service"
+        },
+        {
+            "command": "8081:8081",
+            "description": "Map 8081 port to your 8081 port"
+        }
+    ]
+}

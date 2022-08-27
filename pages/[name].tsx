@@ -88,10 +88,6 @@ const Command: FC = () => {
         })
     }
 
-    // Hover Events
-    
-
-
     useEffect(() => {
         const name: string = typeof router.query.name == "string" ? router.query.name : "";
         name && Data.getSingleCommand(name)
