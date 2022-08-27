@@ -13,6 +13,7 @@ const spaceBetweenLine = 30;
 const Command: FC = () => {
     const router = useRouter();
     const codeLineRef = useRef<any>([]);
+    const codeBlockRef = useRef<any>([]);
 
     const [commandData, setCommandData] = useState<ILine>();
 
@@ -63,7 +64,18 @@ const Command: FC = () => {
             startY = startY + 20 + (leftDir? (index * spaceBetweenLine) : ((numCodeLine - index -1) * spaceBetweenLine) )
             ctx?.lineTo(startX, startY);
 
-            startX = startX + (leftDir? -100 : 100);
+            const lineLongLeft = codeBlockRef.current[0].getBoundingClientRect().left - ((index + 1) * spaceBetweenLine)
+            const lineLongRight = codeBlockRef.current[0].getBoundingClientRect().left + codeBlockRef.current[0].getBoundingClientRect().width + (index * spaceBetweenLine)
+            startX = (leftDir? lineLongLeft : lineLongRight);
+            ctx?.lineTo(startX, startY);
+
+            const stopPoint = codeBlockRef.current[index].getBoundingClientRect().top + (codeBlockRef.current[index].getBoundingClientRect().height / 2);
+            startY = stopPoint;
+            ctx?.lineTo(startX, startY);
+
+            const newStopPointLeft = startX + ((index + 1) * spaceBetweenLine);
+            const newStopPointRight = startX - ((index) * spaceBetweenLine);
+            startX = (leftDir? newStopPointLeft : newStopPointRight);
             ctx?.lineTo(startX, startY);
         })
         return ctx;
@@ -85,6 +97,7 @@ const Command: FC = () => {
 
     useEffect(() => {
         if(commandData && document) drawLine();
+        console.log(codeBlockRef.current[1].getBoundingClientRect().top);
     }, [commandData])
 
     return (
@@ -93,7 +106,7 @@ const Command: FC = () => {
             Your browser does not support the HTML5 canvas tag.</canvas>
             <Header />
             {commandData && <CodeLine codeLineRef={codeLineRef} commandData={commandData} />}
-            {commandData && <CommandBlock commandData={commandData} />}
+            {commandData && <CommandBlock codeBlockRef={codeBlockRef} commandData={commandData} />}
         </>
     )
 }
