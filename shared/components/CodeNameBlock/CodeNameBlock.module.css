@@ -1,10 +1,22 @@
+.code_name_blocks_wrapper {
+    margin-top: 60px;
+}
+
 .container {
     width: 940px;
     margin: auto;
 }
 
-.code_name_blocks_wrapper {
-    margin-top: 30px;
+.searchCommandWrapper {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 30px;
+}
+
+.searchCommandWrapper input {
+    width: 40%;
+    padding: 8px;
+    border-radius: 5px;
 }
 
 .name_block {

@@ -42,8 +42,6 @@ const Command: FC = () => {
         const startX = left;
         const startY = top + height;
 
-        console.log(colors[index])
-
         ctx?.moveTo(startX, startY);
         ctx?.lineTo(startX, startY + underLineHeight);
         ctx?.lineTo(startX + width, startY + underLineHeight);

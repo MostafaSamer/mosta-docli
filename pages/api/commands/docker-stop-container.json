@@ -1,5 +1,5 @@
 {
-    "name": "Docker Container Stop",
+    "name": "Docker Container Stop Server",
     "description": "Stop one or more running containers",
     "categories": ["db", "backup", "api", "ruby"],
     "namespace": "webops-docker",

@@ -12,6 +12,12 @@ const CommandBlocks: FC = () => {
 
     const [allCommand, setAllCommand] = useState<Array<String>>([]);
 
+    const searchCommands = (text: string) => {
+        Data.searchCommands(text)
+            .catch(err => { console.log(err) })
+            .then(data => { setAllCommand(data.name) })
+    }
+
     useEffect(() => {
         Data.getAllCommands()
             .catch(err => { console.log(err) })
@@ -21,6 +27,9 @@ const CommandBlocks: FC = () => {
     return (
         <div className={styles.code_name_blocks_wrapper}>
             <div className={styles.container}>
+                <div className={styles.searchCommandWrapper}>
+                    <input placeholder='Search in Commands...' onChange={(e) => { searchCommands(e.target.value) }}></input>
+                </div>
                 <div className='codeNameBlock'>
                     {
                         allCommand.length > 0 &&

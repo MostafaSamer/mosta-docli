@@ -10,7 +10,13 @@ const getSingleCommand = async (name: string) => {
     return res;
 }
 
+const searchCommands = async (text: string) => {
+    let res = await apiCall("post", "/searchcommands", {searchInput: text});
+    return res;
+}
+
 export default {
     getAllCommands,
-    getSingleCommand
+    getSingleCommand,
+    searchCommands
 };

@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-export default (req, res) => {
+export default (req: any, res: any) => {
   const dirRelativeToApiFolder = 'commands'
 
   const dir = path.resolve('./pages/api', dirRelativeToApiFolder);
@@ -11,8 +11,6 @@ export default (req, res) => {
   const filesNames = files
   .map(fileName => fileName.split('.').slice(0, fileName.split('.').length-1))
   .flat()
-
-  console.log(filesNames)
 
   res.statusCode = 200
   res.json({name: filesNames});
