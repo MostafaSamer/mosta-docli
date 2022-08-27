@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Header from "../shared/components/Header"
 import CodeLine from '../shared/components/CodeLine'
 import CommandBlock from '../shared/components/CommadBlock'
+import Description from "../shared/components/Description"
 import { useEffect } from 'react';
 import Data from "../data/Data"
 import { ILine } from '../shared/Interfaces/line';
@@ -109,9 +110,10 @@ const Command: FC = () => {
 
     return (
         <>
-            <canvas id="drawBoard" style={{position:"absolute", top: "0", left: "0"}}>
+            <canvas id="drawBoard" style={{position:"absolute", top: "0", left: "0", zIndex: "-1"}}>
             Your browser does not support the HTML5 canvas tag.</canvas>
             <Header />
+            {commandData && <Description description={commandData.description}/>}
             {commandData && <CodeLine codeLineRef={codeLineRef} commandData={commandData}/>}
             {commandData && colors && <CommandBlock codeBlockRef={codeBlockRef} commandData={commandData} colors={colors}/>}
         </>

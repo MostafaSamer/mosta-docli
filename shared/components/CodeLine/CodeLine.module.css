@@ -2,3 +2,22 @@
     width: 940px;
     margin: auto;
 }
+
+.codeLine {
+    position: relative;
+}
+
+.copyCol {
+    position: absolute;
+    right: -60px;
+}
+
+.copyButton {
+    background-color: transparent;
+}
+
+.copyButton:hover,
+.copyButton:focus {
+    background-color: transparent;
+    border-color: #fff;
+}

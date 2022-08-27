@@ -1,5 +1,5 @@
 import { FC, useEffect, useState, PropsWithChildren } from 'react'
-import { Col, Row, Typography } from 'antd';
+import { Button, Col, Row, Typography } from 'antd';
 import styles from './CodeLine.module.css';
 import { ILine } from '../../../shared/Interfaces/line';
 
@@ -12,10 +12,23 @@ interface Props {
 
 const CodeLine: FC<PropsWithChildren<Props>> = ({ commandData, codeLineRef }) => {
 
+    const [command, setCommand] = useState("");
+
+    const copyText = () => {
+        navigator.clipboard.writeText(command);
+    }
+
+    useEffect(() => {
+        const fullCode = commandData.commands
+        .map(el => el.command)
+        .join(" ");
+        setCommand(fullCode)
+    }, [commandData])
+
     return (
         <div className='code-line-wrapper'>
             <div className={styles.container}>
-                <div className='code-line'>
+                <div className={styles.codeLine}>
                     <Row gutter={12} align='middle' justify='center'>
                         {
                             commandData?.commands?.length > 0 &&
@@ -25,6 +38,9 @@ const CodeLine: FC<PropsWithChildren<Props>> = ({ commandData, codeLineRef }) =>
                                 </Col>
                             )
                         }
+                        <Col className={styles.copyCol}>
+                            <Button className={styles.copyButton} onClick={copyText}>COPY</Button>
+                        </Col>
                     </Row>
                 </div>
             </div>
