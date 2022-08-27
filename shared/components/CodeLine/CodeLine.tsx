@@ -1,7 +1,6 @@
 import { FC, useEffect, useState, PropsWithChildren } from 'react'
 import { Col, Row, Typography } from 'antd';
 import styles from './CodeLine.module.css';
-import getSingleCommand from "../../../data/Data"
 import { ILine } from '../../../shared/Interfaces/line';
 
 const { Title, Paragraph } = Typography;

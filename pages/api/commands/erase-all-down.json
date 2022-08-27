@@ -6,28 +6,23 @@
     "commands": [
         {
             "command": "sudo",
-            "description": "The sudo command allows you to run programs with the security privileges of another user (by default, as the superuser). It prompts you for your personal password and confirms your request to execute a command by checking a file, called sudoers , which the system administrator configures",
-            "singlepage": true
+            "description": "The sudo command allows you to run programs with the security privileges of another user (by default, as the superuser). It prompts you for your personal password and confirms your request to execute a command by checking a file, called sudoers , which the system administrator configures"
         },
         {
             "command": "rm",
-            "description": "The rm command in Linux OS is used to remove files and directories from the command line. However, the removed files and directories do not get moved to the Trash. Instead, the rm command removes the files and directories permanently.",
-            "singlepage": true
+            "description": "The rm command in Linux OS is used to remove files and directories from the command line. However, the removed files and directories do not get moved to the Trash. Instead, the rm command removes the files and directories permanently."
         },
         {
             "command": "-r",
-            "description": "Remove directories and their contents recursively.",
-            "singlepage": false
+            "description": "Remove directories and their contents recursively."
         },
         {
             "command": "-f",
-            "description": "-f, -force Removes each specified File/Directory Forcefully. Never prompt before every removal.",
-            "singlepage": false
+            "description": "-f, -force Removes each specified File/Directory Forcefully. Never prompt before every removal."
         },
         {
             "command": "/",
-            "description": "Target Directory to Remove",
-            "singlepage": false
+            "description": "Target Directory to Remove"
         }
     ]
 }

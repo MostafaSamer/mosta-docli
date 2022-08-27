@@ -19,6 +19,7 @@ const Command: FC = () => {
     const [commandData, setCommandData] = useState<ILine>();
     const [colors, setColors] = useState<Array<string>>([]);
 
+    // Drawing Lines
     const getBoardReady = () => {
         let c = document.getElementById("drawBoard") as HTMLCanvasElement | null;
         c!.width = document.body.offsetWidth;
@@ -26,7 +27,6 @@ const Command: FC = () => {
         let ctx = c?.getContext("2d");
         return ctx;
     }
-
     const getcodeLinePrefrence = (item: any) => {
         const top = item.getBoundingClientRect().top;
         const left = item.getBoundingClientRect().left;
@@ -35,7 +35,6 @@ const Command: FC = () => {
 
         return { top, left, width, height }
     }
-
     const drawUnderLine = (ctx: any, item: any, index: number) => {
         const { top, left, width, height } = getcodeLinePrefrence(item);
 
@@ -48,7 +47,6 @@ const Command: FC = () => {
         ctx?.lineTo(startX + width, startY);
         return ctx;
     }
-
     const drawFlowLine = (ctx: any, item: any, index: number) => {
         const numCodeLine = codeLineRef.current.length;
         const leftDir = index < numCodeLine / 2;
@@ -76,13 +74,11 @@ const Command: FC = () => {
         ctx?.lineTo(startX, startY);
         return ctx;
     }
-
     const drawLine = (ctx: any, item: any, index: number) => {
         ctx = drawUnderLine(ctx, item, index);
         ctx = drawFlowLine(ctx, item, index);
         ctx?.stroke();
     }
-
     const drawLines = () => {
         let ctx = getBoardReady();
         codeLineRef.current.map((item: any, index: number) => {
@@ -91,6 +87,10 @@ const Command: FC = () => {
             drawLine(ctx, item, index);
         })
     }
+
+    // Hover Events
+    
+
 
     useEffect(() => {
         const name: string = typeof router.query.name == "string" ? router.query.name : "";
@@ -101,19 +101,19 @@ const Command: FC = () => {
 
     useEffect(() => {
         if(commandData) {
-            setColors(getRandomColors(commandData?.commands.length ?? 1 ))
+            setColors(getRandomColors(commandData?.commands.length))
         };
     }, [commandData])
 
     useEffect(() => {
-        if(commandData && document && colors[0]) {
+        if(commandData && document) {
             drawLines();
         };
     }, [commandData, colors])
 
     return (
         <>
-        <canvas id="drawBoard" style={{position:"absolute", top: "0", left: "0"}}>
+            <canvas id="drawBoard" style={{position:"absolute", top: "0", left: "0"}}>
             Your browser does not support the HTML5 canvas tag.</canvas>
             <Header />
             {commandData && <CodeLine codeLineRef={codeLineRef} commandData={commandData}/>}

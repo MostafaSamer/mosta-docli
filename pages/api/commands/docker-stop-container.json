@@ -6,28 +6,23 @@
     "commands": [
         {
             "command": "docker",
-            "description": "Service Name",
-            "singlepage": true
+            "description": "Service Name"
         },
         {
             "command": "container",
-            "description": "Target Container in docker service",
-            "singlepage": true
+            "description": "Target Container in docker service"
         },
         {
             "command": "stop",
-            "description": "Remove directories and their contents recursively.",
-            "singlepage": false
+            "description": "Remove directories and their contents recursively."
         },
         {
             "command": "[OPTIONS]",
-            "description": "--time , -t 10 Seconds to wait for stop before killing it",
-            "singlepage": false
+            "description": "--time , -t 10 Seconds to wait for stop before killing it"
         },
         {
             "command": "CONTAINER",
-            "description": "Target Container want to stop",
-            "singlepage": false
+            "description": "Target Container want to stop"
         }
     ]
 }
