@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import Data from "../data/Data"
 import { ILine } from '../shared/Interfaces/line';
 import getRandomColors from '../shared/services/RandomColors'
+import Footer from '../shared/components/Footer';
 
 const underLineHeight = 10;
 const spaceBetweenLine = 30;
@@ -116,6 +117,7 @@ const Command: FC = () => {
             {commandData && <Description description={commandData.description}/>}
             {commandData && <CodeLine codeLineRef={codeLineRef} commandData={commandData}/>}
             {commandData && colors && <CommandBlock codeBlockRef={codeBlockRef} commandData={commandData} colors={colors}/>}
+            <Footer />
         </>
     )
 }

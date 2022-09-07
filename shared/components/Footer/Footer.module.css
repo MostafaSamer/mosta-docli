@@ -1,0 +1,19 @@
+.footerWrapper {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.container {
+    width: 940px;
+    margin: auto;
+}
+
+.footer {
+    text-align: center;
+}
+
+.footerHeart {
+    position: relative;
+    top: 7px;
+}
