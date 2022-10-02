@@ -1,3 +1,6 @@
+## Screenshots
+![screenshot_1](https://i.imgur.com/K0Y4znP.jpg)
+
 ## To Run Project
 - clone Project
 - install dependencies `yarn install`
