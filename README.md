@@ -1,4 +1,4 @@
-## A simple next project to display the CLI command in a meaningful way
+A simple next project to display the CLI command in a meaningful way
 
 ## Screenshots
 ![screenshot_1](https://i.imgur.com/K0Y4znP.jpg)
